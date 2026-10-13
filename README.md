@@ -84,3 +84,66 @@ Relationships were created in the **Model View** to enable proper filter context
 ## 📜 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+
+# 📊 Global Operations & Workforce Analytics — Power BI Desktop Project
+
+> **Sectional Assignment II** | **File:** `powr_bi_assignment_2.pbix`  
+> **Dashboard Title:** Global Operations & Workforce Analytics  
+> **Canvas Size:** Custom Executive Dimensions ($2700 \times 1860\text{ px}$)  
+
+---
+
+## 📌 Executive Overview
+
+This repository contains the complete Power BI Desktop analysis, data model, calculated columns, DAX measures, and visual dashboards built for **Sectional Assignment II**.
+
+The project integrates data from multiple domain datasets—customer orders, workforce layoffs, flight schedules, and product breakdowns—into a unified data model. The dashboard delivers operational insights across country order distributions, workforce layoff trends, order fulfillment time series, and data quality metrics.
+
+---
+
+## 🛠️ Data Model & Dataset Architecture
+
+The data model operates in **Import Mode** across five core tables:
+
+| Table Name | Rows | Columns | Description & Role in Project |
+| :--- | :---: | :---: | :--- |
+| **`ListOfOrders`** | 4,117 | 12 | Primary order table used for the **Clustered Column Chart** (Orders by Country). |
+| **`Customer Data`** | 699 | 10 | Customer transaction details used for the **Line Chart** and **Calculated Column**. |
+| **`Employee_Layoffs`** | 2,273 | 10 | Global layoff records used for the **Pie Chart** and **all 6 DAX Measures**. |
+| **`OrderBreakdown`** | 8,047 | 8 | Line-item order breakdown loaded into the data model. |
+| **`FlightData`** | 43 | 3 | Regional flight performance data loaded into the data model. |
+
+---
+
+## 📋 Completed Tasks & Assignment Deliverables
+
+### 1. Clustered Column Chart: Orders by Country
+* **Table:** `ListOfOrders`
+* **X-Axis (Category):** `Country`
+* **Y-Axis (Values):** `Count of Order ID`
+* **Purpose:** Identifies top international market demand by sorting countries by total order placement volume (e.g., France, Germany, United Kingdom, Italy, Spain).
+
+---
+
+### 2. Line Chart: Order Volume Time Series
+* **Table:** `Customer Data`
+* **X-Axis (Category):** `Date` (Full Date Hierarchy: Year $\rightarrow$ Quarter $\rightarrow$ Month $\rightarrow$ Day)
+* **Y-Axis (Values):** `Count of Order ID`
+* **Purpose:** Plots order volume over time across 2013–2016, enabling multi-level drill-down from annual trends to daily order spikes.
+
+---
+
+### 3. Pie Chart: Layoffs by Location
+* **Table:** `Employee_Layoffs`
+* **Legend / Category:** `Location`
+* **Values:** `Sum of Total_Laid_Off`
+* **Purpose:** Visualizes proportional workforce reductions across global tech hubs and cities (e.g., SF Bay Area, Seattle, New York City, Bengaluru, London, Austin).
+
+---
+
+### 4. Calculated Column: Replicated Total Price
+Added to the **`Customer Data`** table to verify transactional pricing consistency row by row.
+
+```dax
+New Total Price = 'Customer Data'[Quantity] * 'Customer Data'[Price Per Unit ]
